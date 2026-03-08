@@ -1,0 +1,8 @@
+{
+  "product": "Auto",
+  "age": 34,
+  "location": "Hyderabad",
+  "sumInsured": 800000,
+  "pastClaims": 1,
+  "riskFactors": "no prior DUI, city parking"
+}

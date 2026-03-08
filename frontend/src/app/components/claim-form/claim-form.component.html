@@ -1,0 +1,49 @@
+<div class="form-wrapper">
+    <form (ngSubmit)="onSubmit()" class="form-card">
+        <h2 class="form-title">Claim Triage Details</h2>
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label">Product Line</label>
+                <select [(ngModel)]="formData.product" name="product" class="form-input">
+                    <option value="Auto">Auto Insurance</option>
+                    <option value="Home">Home Insurance</option>
+                    <option value="Health">Health Insurance</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Claim Amount</label>
+                <input type="number" [(ngModel)]="formData.claimAmount" name="claimAmount" class="form-input"
+                    placeholder="e.g. 120000" min="0" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Policy Tenure (Years)</label>
+                <input type="number" [(ngModel)]="formData.policyTenure" name="policyTenure" class="form-input"
+                    placeholder="e.g. 3" min="0" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Identified Red Flags</label>
+                <input type="text" [(ngModel)]="formData.redFlags" name="redFlags" class="form-input"
+                    placeholder="e.g. none, late reporting" required>
+            </div>
+            <div class="form-group full-width">
+                <label class="form-label">Incident Description</label>
+                <textarea [(ngModel)]="formData.incidentDesc" name="incidentDesc" class="form-input textarea"
+                    placeholder="e.g. Rear-end collision at low speed" rows="3" required></textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn" [disabled]="loading">
+            <span *ngIf="loading" class="spinner"></span>
+            {{ loading ? 'Analyzing Claim Data...' : 'Analyze Claim Details' }}
+        </button>
+    </form>
+
+    <div *ngIf="error" class="error-box">
+        <strong>Error Analyzing Claim</strong>
+        <p>{{ error }}</p>
+    </div>
+
+    <app-decision-card *ngIf="result" title="Claim Triage Result" [badgeLabel]="result.decision"
+        [highlight]="result.decision" [details]="detailsText">
+    </app-decision-card>
+</div>

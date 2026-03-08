@@ -1,0 +1,21 @@
+<div class="card animate-in">
+    <div class="card-header">
+        <h3 class="card-title">{{ title }}</h3>
+        <app-risk-badge [level]="badgeLabel"></app-risk-badge>
+    </div>
+
+    <div class="highlight-box">
+        <p class="highlight-text">{{ highlight }}</p>
+    </div>
+
+    <div class="details-section">
+        <h4 class="details-label">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            AI Analysis
+        </h4>
+        <p class="details-text">{{ details }}</p>
+    </div>
+</div>

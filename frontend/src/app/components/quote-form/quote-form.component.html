@@ -1,0 +1,54 @@
+<div class="form-wrapper">
+    <form (ngSubmit)="onSubmit()" class="form-card">
+        <h2 class="form-title">Underwriting Quote Details</h2>
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label">Product</label>
+                <select [(ngModel)]="formData.product" name="product" class="form-input">
+                    <option value="Auto">Auto Insurance</option>
+                    <option value="Home">Home Insurance</option>
+                    <option value="Health">Health Insurance</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Applicant Age</label>
+                <input type="number" [(ngModel)]="formData.age" name="age" class="form-input" placeholder="e.g. 34"
+                    min="18" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Location</label>
+                <input type="text" [(ngModel)]="formData.location" name="location" class="form-input"
+                    placeholder="e.g. Hyderabad" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Sum Insured</label>
+                <input type="number" [(ngModel)]="formData.sumInsured" name="sumInsured" class="form-input"
+                    placeholder="e.g. 800000" min="1000" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Past Claims Count</label>
+                <input type="number" [(ngModel)]="formData.pastClaims" name="pastClaims" class="form-input"
+                    placeholder="e.g. 1" min="0" required>
+            </div>
+            <div class="form-group full-width">
+                <label class="form-label">Risk Factors</label>
+                <textarea [(ngModel)]="formData.riskFactors" name="riskFactors" class="form-input textarea"
+                    placeholder="e.g. no prior DUI, city parking" rows="3" required></textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn" [disabled]="loading">
+            <span *ngIf="loading" class="spinner"></span>
+            {{ loading ? 'Evaluating Risk Profile...' : 'Generate AI Quote' }}
+        </button>
+    </form>
+
+    <div *ngIf="error" class="error-box">
+        <strong>Error Processing Quote</strong>
+        <p>{{ error }}</p>
+    </div>
+
+    <app-decision-card *ngIf="result" [title]="result.product + ' Insurance Quote Generated'"
+        [badgeLabel]="result.riskBand" [highlight]="highlightText" [details]="result.underwritingNotes">
+    </app-decision-card>
+</div>
